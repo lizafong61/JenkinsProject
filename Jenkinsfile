@@ -23,9 +23,11 @@ pipeline {
 				archive 'target/*.jar'
 			}
 		}
-		stage("Email Build Status"){
+		stage("Deploy"){
 			steps {
-				mail body: "${env.JOB_NAME}  - Build # ${env.BUILD_NUMBER}  - ${currentBuild.currentResult} \n\nCheck console output at ${env.BUILD_URL} to view the results.", subject: "${env.JOB_NAME}  - Build # ${env.BUILD_NUMBER}  - ${currentBuild.currentResult}!!", to: 'lizafong61@gmail.com'
+				withMaven(maven: M3){
+				bat 'mvn deploy'
+				}
 			}
 		}
 	}
