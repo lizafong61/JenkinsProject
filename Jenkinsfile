@@ -25,7 +25,7 @@ pipeline {
 		}
 		stage("Deploy"){
 			steps {
-				withMaven(maven: M3){
+				withMaven(maven: 'M3'){
 				bat 'mvn deploy'
 				}
 			}
